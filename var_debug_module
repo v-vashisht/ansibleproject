@@ -1,0 +1,11 @@
+---
+- name: This contains variable
+  hosts: webserver
+  become: yes
+  vars:
+    fruit: "apple"
+  tasks:
+    - name: this module will store variable
+      debug:
+        msg: "our fruit is {{ fruit }}"
+
