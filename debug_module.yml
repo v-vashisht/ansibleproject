@@ -1,0 +1,11 @@
+---
+- name: debug module demo
+  hosts: webserver
+  tasks:
+    - name: debug message
+      debug:
+        msg: "Hello Vaishali"
+
+    - name: debug message
+      debug:
+        msg: "debug module is used to print message"
