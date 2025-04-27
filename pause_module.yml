@@ -1,0 +1,13 @@
+---
+- name: this is pause module demo
+  hosts: all
+  vars:
+    wait_seconds: 10
+  tasks:
+    - name: pause for {{ wait_seconds | int }} second(s)
+      pause:
+        seconds: "{{ wait_seconds | int }}"
+
+    - name: message
+      debug:
+        msg: "The end"
