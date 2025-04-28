@@ -2,18 +2,18 @@
 - name: this demo is for | and > block
   hosts: webserver
   vars:
-    variable1: |
+    variable1: |-
       exactly as you see
       will appear these three
       lines of poetry
-    variable2: >
+    variable2: >-
       this is really
       a single line of text
       despite appearances
   tasks:
     - name: print variable1
       debug:
-        var: variable1
+        msg: "{{ variable.split('\n) }}'
     - name: print variable2
       debug:
         var: variable2
