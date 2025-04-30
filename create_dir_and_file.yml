@@ -1,0 +1,40 @@
+---
+- name: Demo to create directory and empty file and check if file exists
+  hosts: webserver
+  become: yes
+
+  vars:
+    mypath: /app/ansible-directory
+    myfilepath: /app/ansible-directory/test-file.txt
+
+  tasks:
+    - name: Create a directory
+      file:
+        state: directory
+        path: "{{ mypath }}"
+        owner: ec2-user
+        group: ec2-user
+        mode: "0775"
+
+    - name: Create an empty file
+      file:
+        state: touch
+        path: "{{ myfilepath }}"
+        owner: ec2-user
+        group: ec2-user
+        mode: "0755"
+
+    - name: Check if file exists
+      stat:
+        path: "{{ myfilepath }}"
+      register: file_data
+
+    - name: Report if file exists
+      debug:
+        msg: "Your file {{ myfilepath }} exists."
+      when: file_data.stat.exists
+
+    - name: Report if file does not exist
+      debug:
+        msg: "Your file {{ myfilepath }} does not exist."
+      when: not file_data.stat.exists
